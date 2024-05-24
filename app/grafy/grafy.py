@@ -362,12 +362,12 @@ def mapa():
 }
     """
     df = pd.DataFrame({
-        "kraj": ["Hlavní město Praha", "Středočeský kraj", "Jihočeský kraj", "Plzeňský kraj", "Karlovarský kraj", 
-                 "Ústecký kraj", "Liberecký kraj", "Královéhradecký kraj","Pardubický kraj", "Kraj Vysočina", 
-                 "Jihomoravský kraj", "Olomoucký kraj", "Zlínský kraj", "Moravskoslezský kraj"]
-    })
+       "kraj": [feature["properties"]["naz_cznuts3"] for feature in geojson["features"]],
+        "pocet_ob_91": [feature["properties"]["pocet_ob_91"] for feature in geojson["features"]]
+    }
+    )
+    print(df.head())
     fig = px.choropleth_mapbox(data_frame=df, locations="kraj",featureidkey="properties.naz_cznuts3",geojson=geojson,
                            mapbox_style="carto-positron",
-                           zoom=3, center = {"lat": 49.37279121, "lon": 15.43099827}
-                          )
+                           zoom=3, center = {"lat": 49.37279121, "lon": 15.43099827},hover_name="kraj", hover_data=["pocet_ob_91"])
     return fig
