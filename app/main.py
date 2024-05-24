@@ -8,7 +8,7 @@ def domov():
 
 @app.route('/graf')
 def graf():
-    fig = grafy.test()
+    fig = grafy.mapa()
     return render_template('graf.html', plot=fig.to_html(full_html=False))
 
 
